@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="canvas.js"></script>
+    <title>Football Planner</title>
+
+    <style>
+        #canvas {
+            background: url('canvas.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+
+        }
+
+        body {
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+            background-color: #212529;
+        }
+
+        .playerIcon {
+            position: absolute;
+            cursor: grab;
+            margin-top: -25px;
+            margin-left: -15PX;
+        }
+
+        .playerContainer {
+            padding: 40px 0;
+        }
+
+        #container {
+            border: 3px solid whitesmoke;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid px-5 mt-2" id="container">
+        <div class="row px-3">
+            <div class="col-3 my-3 text-center">
+                <div class="row border p-3 mb-2 bg-light">
+                    <h5 class="shadow py-2 alert-primary">Team A</h5>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPng" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPng.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                </div>
+                <div class="row border p-3 mb-2 bg-light">
+                    <h5 class="shadow py-2 alert-danger">Team B</h5>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                    <div class="col-3 playerContainer border shadow"><img name="playerPngRed" class="playerIcon"
+                            onmouseover="letsDrag(this)" src="playerPngRed.png" height="50" width="35" alt=""
+                            draggable="false"></div>
+                </div>
+
+                <select class="form-select alert-info my-2" onchange="selectDrawOption(this)">
+                    <option value="" selected>Select Drawing Option</option>
+                    <option value="">None</option>
+                    <option value="arrow">Arrow &#x2197;</option>
+                    <option value="dottedarrow">Dotted Arrow &#x21e2;</option>
+                    <option value="freehand">Free Hand &#x270F;</option>
+                </select>
+
+                <div class="row my-1">
+                    <div class="col-6">
+                        <button id="undoButton" class="btn btn-info py-2 w-100" disabled><b class="me-2">UNDO</b> <i
+                                class="fa-solid fa-rotate-left"></i></button>
+                    </div>
+                    <div class="col-6">
+                        <button id="redoButton" class="btn btn-info py-2 w-100" disabled><b class="me-2">REDO</b> <i
+                                class="fa-solid fa-rotate-right"></i></button>
+                    </div>
+                </div>
+
+
+                <button class="btn btn-success my-1 w-100 py-2" onclick="saveCanvas()"><b class="me-3">S A V E</b>
+                    <i class="fa-solid fa-download"></i></button>
+
+            </div>
+            <div class="col-9 my-3 text-end">
+                <canvas id="canvas" width="1295" height="810"></canvas>
+            </div>
+        </div>
+
+        <div class="text-center mb-3">
+            <h5 class="text-light">Powered by PHLOXBLOG</h5>
+        </div>
+
+    </div>
+
+    <button type="button" id="showModal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        hidden>
+        Launch demo modal
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true"> <!-- data-bs-backdrop="static" -->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" id="closeModal" class="close" data-bs-dismiss="modal" aria-label="Close"
+                        hidden></button>
+                    <span id="statusSpinner"></span> <span id="statusMsg"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        function isOnSomething(canvas, element) {
+            const canvasRect = canvas.getBoundingClientRect();
+            const divRect = element.getBoundingClientRect();
+
+            const result =
+                divRect.left >= canvasRect.left &&
+                divRect.right <= canvasRect.right &&
+                divRect.top >= canvasRect.top &&
+                divRect.bottom <= canvasRect.bottom;
+
+            return result;
+        }
+
+
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const undoButton = document.getElementById("undoButton");
+        const redoButton = document.getElementById("redoButton");
+        let drawOption = "";
+
+
+
+        function selectDrawOption(prop) {
+            drawOption = prop.value;
+            if (drawOption == "freehand") {
+                canvas.style.cursor = 'url("pencil.png"), auto';
+            } else {
+                canvas.style.cursor = 'default';
+            }
+        }
+
+
+
+        let undoStack = [canvas.toDataURL()];
+        let redoStack = [];
+        updateUndoRedoButtons();
+
+        ctx.lineWidth = 3;
+        let drawing = false;
+        let currentArrow = null;
+        let lastX = 0;
+        let lastY = 0;
+        let startX = 0;
+        let startY = 0;
+        const arrowWidth = 20;
+        const arrowLength = 20;
+        let playerPosition = [];
+
+
+
+        canvas.addEventListener("mousedown", (e) => {
+            drawing = true;
+            startX = e.clientX - canvas.getBoundingClientRect().left;
+            startY = e.clientY - canvas.getBoundingClientRect().top;
+            currentArrow = { startX, startY, endX: startX, endY: startY };
+        });
+
+        canvas.addEventListener("mousemove", (e) => {
+            if (!drawing) return;
+
+            if (drawOption == "arrow") {
+                currentArrow.endX = e.clientX - canvas.getBoundingClientRect().left;
+                currentArrow.endY = e.clientY - canvas.getBoundingClientRect().top;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const img = new Image();
+                img.src = undoStack[undoStack.length - 1];
+                ctx.drawImage(img, 0, 0)
+                drawArrow(currentArrow);
+
+            } else if (drawOption == "dottedarrow") {
+                currentArrow.endX = e.clientX - canvas.getBoundingClientRect().left;
+                currentArrow.endY = e.clientY - canvas.getBoundingClientRect().top;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const img = new Image();
+                img.src = undoStack[undoStack.length - 1];
+                ctx.drawImage(img, 0, 0)
+                drawDottedArrow(currentArrow);
+
+            } else if (drawOption == "freehand") {
+                drawFreeHand(e);
+            }
+        });
+
+        canvas.addEventListener("mouseup", () => {
+            if (drawing) {
+                currentArrow = null;
+                if (drawOption != "") {
+                    setundoStack();
+                }
+                drawing = false;
+                ctx.beginPath();
+            }
+        });
+
+
+
+        function drawArrow(arrow) {
+            if (arrow.startX != arrow.endX && arrow.startY != arrow.endY) {
+                ctx.setLineDash([0, 0]);
+                ctx.beginPath();
+                ctx.moveTo(arrow.startX, arrow.startY);
+                ctx.lineTo(arrow.endX, arrow.endY);
+                ctx.stroke();
+
+                const angle = Math.atan2(arrow.endY - arrow.startY, arrow.endX - arrow.startX);
+
+                ctx.beginPath();
+                ctx.moveTo(arrow.endX, arrow.endY);
+                ctx.lineTo(
+                    arrow.endX - arrowLength * Math.cos(angle - Math.PI / 6),
+                    arrow.endY - arrowLength * Math.sin(angle - Math.PI / 6)
+                );
+                ctx.lineTo(
+                    arrow.endX - arrowLength * Math.cos(angle + Math.PI / 6),
+                    arrow.endY - arrowLength * Math.sin(angle + Math.PI / 6)
+                );
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function drawDottedArrow(arrow) {
+            if (arrow.startX != arrow.endX && arrow.startY != arrow.endY) {
+                ctx.setLineDash([10, 8]);
+                ctx.beginPath();
+                ctx.moveTo(arrow.startX, arrow.startY);
+                ctx.lineTo(arrow.endX, arrow.endY);
+                ctx.stroke();
+
+                const angle = Math.atan2(arrow.endY - arrow.startY, arrow.endX - arrow.startX);
+
+                ctx.beginPath();
+                ctx.moveTo(arrow.endX, arrow.endY);
+                ctx.lineTo(
+                    arrow.endX - arrowLength * Math.cos(angle - Math.PI / 6),
+                    arrow.endY - arrowLength * Math.sin(angle - Math.PI / 6)
+                );
+                ctx.lineTo(
+                    arrow.endX - arrowLength * Math.cos(angle + Math.PI / 6),
+                    arrow.endY - arrowLength * Math.sin(angle + Math.PI / 6)
+                );
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function drawFreeHand(e) {
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+            ctx.stroke();
+            ctx.setLineDash([0, 0]);
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+        }
+
+
+
+
+        function setundoStack() {
+            undoStack.push(canvas.toDataURL());
+            redoStack = [];
+            updateUndoRedoButtons();
+        }
+
+        function updateUndoRedoButtons() {
+            if (undoStack.length > 1) {
+                undoButton.disabled = false;
+            } else {
+                undoButton.disabled = true;
+            }
+
+            if (redoStack.length > 0) {
+                redoButton.disabled = false;
+            } else {
+                redoButton.disabled = true;
+            }
+        }
+
+        undoButton.addEventListener("click", () => {
+            if (undoStack.length > 1) {
+                let item = undoStack.pop()
+                redoStack.push(item);
+                const img = new Image();
+                img.src = undoStack[undoStack.length - 1];
+                img.onload = function () {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                    updateUndoRedoButtons();
+                };
+            }
+        });
+
+        redoButton.addEventListener("click", () => {
+            if (redoStack.length > 0) {
+                const img = new Image();
+                let item = redoStack.pop();
+                undoStack.push(item);
+                img.src = item;
+                img.onload = function () {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                    updateUndoRedoButtons();
+                };
+            }
+        });
+
+
+
+        function letsDrag(draggableElement) {
+
+            let offsetX, offsetY;
+            let isDragging = false;
+            let x, y;
+            let prevX, prevY;
+
+            function makeDuplicate() {
+                let onCanvas = isOnSomething(canvas, draggableElement)
+                if (!onCanvas) {
+                    var clone = draggableElement.cloneNode(true);
+                    draggableElement.parentNode.appendChild(clone);
+                }
+            }
+
+            function resetElement() {
+                let onCanvas = isOnSomething(canvas, draggableElement)
+                if (!onCanvas) {
+                    // draggableElement.remove();
+                    draggableElement.style.left = prevX;
+                    draggableElement.style.top = prevY;
+                }
+            }
+
+            draggableElement.addEventListener('mousedown', (event) => {
+                isDragging = true;
+                // makeDuplicate();
+
+                let onCanvas = isOnSomething(canvas, draggableElement)
+                if (!onCanvas) {
+                    prevX = draggableElement.style.left;
+                    prevY = draggableElement.style.top;
+                }
+
+                offsetX = event.clientX - draggableElement.getBoundingClientRect().left;
+                offsetY = event.clientY - draggableElement.getBoundingClientRect().top;
+                draggableElement.style.cursor = 'grabbing';
+            });
+
+            document.addEventListener('mousemove', (event) => {
+                if (!isDragging) return;
+                x = event.clientX - offsetX;
+                y = event.clientY - offsetY;
+                draggableElement.style.left = x + 15 + 'px';
+                draggableElement.style.top = y + 25 + 'px';
+                // document.getElementById("deleteElement").style.visibility = "visible";
+
+                let onCanvas = isOnSomething(canvas, draggableElement);
+                if (!onCanvas) {
+                    document.getElementById("container").style.border = "3px solid red";
+                    // document.body.style.backgroundColor = "#f8d7da";
+                } else {
+                    document.getElementById("container").style.border = "3px solid green";
+                    // document.body.style.backgroundColor = "#d1e7dd";
+                }
+            });
+
+            document.addEventListener('mouseup', (event) => {
+                if (isDragging) {
+                    isDragging = false;
+                    draggableElement.style.cursor = 'grab';
+                    resetElement();
+                    // document.getElementById("deleteElement").style.visibility = "hidden";
+                    document.getElementById("container").style.border = "3px solid whitesmoke";
+                    // document.body.style.backgroundColor = "#212529"
+
+                    playerPosition.forEach(element => {
+                        if (element.elem == draggableElement) {
+                            let i = playerPosition.indexOf(element);
+                            playerPosition.splice(i, 1);
+                        }
+                    });
+                    playerPosition.push({ "elem": draggableElement, "x": x, "y": y });
+                }
+            });
+        }
+
+
+
+        function saveCanvas() {
+            document.getElementById("showModal").click();
+            document.getElementById("statusSpinner").innerHTML = '<i class="fas fa-spinner fa-spin text-primary fa-xl me-4"></i>';
+            document.getElementById("statusMsg").innerText = "Preparing...";
+            const image1 = new Image();
+            const image2 = new Image();
+
+            const mycanvasSrc = canvas.toDataURL("image/png");
+            image1.src = canvasSrc; // Canvas Bg --> Layer 1
+            image2.src = mycanvasSrc; // Arrow & Freehand --> Layer 2
+            // image3.src = playerPng;
+
+            image1.onload = function () {
+                image2.onload = async function () {
+                    ctx.drawImage(image1, 0, 0);
+                    ctx.drawImage(image2, 0, 0);
+
+                    for (let index = 0; index < playerPosition.length; index++) {
+                        const element = playerPosition[index];
+                        await drawPlayerImage(element);
+                    }
+                }
+
+            }
+
+
+            setTimeout(() => {
+                const tempImg = canvas.toDataURL("image/png");
+
+                const downloadLink = document.createElement('a');        //**Code to save the canvas image in Client side.
+                document.body.appendChild(downloadLink);
+                downloadLink.href = tempImg;
+                downloadLink.target = '_self';
+                downloadLink.download = "canvas";
+                downloadLink.click();
+
+                // const payload = { image: tempImg };
+                // // console.log(payload);
+
+                // let fetchRes = fetch("http://192.168.29.192:8080/test",    // **Code to save the canvas image in Server side.
+                //     {
+                //         headers: {
+                //             'Content-Type': 'application/json'
+                //         },
+                //         method: "POST",
+                //         body: JSON.stringify(payload),
+                //     }
+                // );
+
+                // fetchRes.then(res =>
+                //     res.json()).then(d => {
+                //         document.getElementById("statusSpinner").innerHTML = '<i class="fa-solid fa-circle-check text-success fa-xl me-4"></i>';
+                //         document.getElementById("statusMsg").innerText = d;
+                //         console.log(d)
+                //     })
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const img = new Image();
+                img.src = undoStack[undoStack.length - 1];
+                ctx.drawImage(img, 0, 0);
+                document.getElementById("statusSpinner").innerHTML = '<i class="fa-solid fa-circle-check text-success fa-xl me-4"></i>';
+                document.getElementById("statusMsg").innerText = "Canvas has been saved successfully!";
+            }, 5000)
+
+        }
+
+        async function drawPlayerImage(element) {
+            const image3 = new Image();
+            image3.src = eval(element.elem.getAttribute('name'));
+            image3.onload = function () {
+                const posX = element.x - canvas.getBoundingClientRect().left;
+                const posY = element.y - canvas.getBoundingClientRect().top;
+                ctx.drawImage(image3, posX, posY, 35, 50);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
